@@ -1,0 +1,142 @@
+{
+  "npv_A": 641,
+  "npv_B": 71,
+  "npv_C": 40,
+  "payback_A": "1,33",
+  "cf_A": [
+    120.1,
+    181.3,
+    232.9,
+    297.4,
+    378.0
+  ],
+  "npv_per_harga": {
+    "6000": 135,
+    "6500": 303,
+    "7000": 472,
+    "7500": 641,
+    "8000": 810,
+    "8500": 979,
+    "9000": 1148
+  },
+  "breakeven_price": 5602,
+  "breakeven_vol_jt": 18.6,
+  "breakeven_hpp": 6548,
+  "breakeven_margin_pct": 12.7,
+  "hpp_pack": 4650,
+  "gross_pack": 2850,
+  "mc_p_pos_pct": 100.0,
+  "mc_p10": 333,
+  "mc_p50": 628,
+  "mc_p90": 966,
+  "mc_min": 10,
+  "mc_max": 1520,
+  "downside": {
+    "harga-20%+vol-30%": 8,
+    "vol-50%": 177,
+    "harga-20%": 135,
+    "harga-20%+vol-50%": -77,
+    "harga-10%+vol-20%": 253,
+    "marjin-10poin": 388,
+    "marjin-10poin+vol-30%": 185,
+    "triple": -81,
+    "kanibalisasi-40%": 585
+  },
+  "grid_6x5": [
+    [
+      -110,
+      -72,
+      -34,
+      4,
+      42
+    ],
+    [
+      8,
+      71,
+      135,
+      198,
+      261
+    ],
+    [
+      185,
+      286,
+      388,
+      489,
+      590
+    ],
+    [
+      362,
+      502,
+      641,
+      780,
+      920
+    ],
+    [
+      540,
+      717,
+      894,
+      1072,
+      1249
+    ],
+    [
+      717,
+      932,
+      1148,
+      1363,
+      1578
+    ]
+  ],
+  "tornado": {
+    "harga": [
+      135,
+      1148
+    ],
+    "volume": [
+      362,
+      920
+    ],
+    "marjin": [
+      514,
+      768
+    ],
+    "kanibalisasi": [
+      619,
+      663
+    ],
+    "pemasaran": [
+      631,
+      651
+    ]
+  },
+  "trade_margin": {
+    "0": 641,
+    "15": 261,
+    "20": 135,
+    "22.5": 71,
+    "25": 8,
+    "30": -119
+  },
+  "trade_margin_exact": {
+    "0": 641.0,
+    "150": 261.1,
+    "200": 134.5,
+    "225": 71.2,
+    "250": 7.8,
+    "300": -118.8
+  },
+  "trade_crossover_pct": 22.5,
+  "trade_breakeven_pct": 25.3,
+  "trade_breakeven_net_rp": 5602,
+  "mc_p1": 157,
+  "mc_uniform_neg_pct": 0.3,
+  "mc_uniform_neg_count": 26,
+  "gate0_threshold_pct": 60,
+  "gate0_breakeven_share_pct": 31,
+  "gate0_vol_jt": 36,
+  "gate0_npv": 269,
+  "rev_thn3": 703,
+  "rev_thn3_exact": 703.5,
+  "rev_thn1": 450,
+  "vol_thn3_jt": 93.8,
+  "unit_contrib_thn1": 2001
+}
