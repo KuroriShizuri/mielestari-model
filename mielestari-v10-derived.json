@@ -1,0 +1,462 @@
+{
+  "npv_per_harga_60jt": {
+    "5500": -34.4,
+    "6000": 134.5,
+    "6500": 303.3,
+    "7000": 472.2,
+    "7500": 641.0,
+    "8000": 809.8,
+    "8500": 978.7,
+    "9000": 1147.5
+  },
+  "breakeven_price_rp": 5602,
+  "breakeven_hpp_rp": 6548,
+  "breakeven_margin_pct": 12.7,
+  "breakeven_vol_jt": 18.6,
+  "hpp_pack_rp": 4650,
+  "grid_6x5": {
+    "prices": [
+      5500,
+      6000,
+      6750,
+      7500,
+      8250,
+      9000
+    ],
+    "vols_jt": [
+      42,
+      51,
+      60,
+      69,
+      78
+    ],
+    "npv": [
+      [
+        -110,
+        -72,
+        -34,
+        4,
+        42
+      ],
+      [
+        8,
+        71,
+        135,
+        198,
+        261
+      ],
+      [
+        185,
+        286,
+        388,
+        489,
+        590
+      ],
+      [
+        362,
+        502,
+        641,
+        780,
+        920
+      ],
+      [
+        540,
+        717,
+        894,
+        1072,
+        1249
+      ],
+      [
+        717,
+        932,
+        1148,
+        1363,
+        1578
+      ]
+    ],
+    "neg_cells": 3,
+    "row_avg": {
+      "5500": -34,
+      "6000": 135,
+      "6750": 388,
+      "7500": 641,
+      "8250": 894,
+      "9000": 1148
+    }
+  },
+  "downside": {
+    "harga_-20%_vol_-30%": 7.7,
+    "vol_-50%": 176.5,
+    "harga_-20%_saja": 134.5,
+    "harga_-20%_vol_-50%": -76.8,
+    "harga_-10%_vol_-20%": 252.6,
+    "marjin_-10poin": 387.7,
+    "marjin_-10poin_vol_-30%": 185.0,
+    "triple_harga_-20%_vol_-30%_marjin_-5poin": -80.9,
+    "kanibalisasi_40%": 585.3
+  },
+  "maut_curve": {
+    "10": {
+      "A": 3.46,
+      "B": 4.06,
+      "C": 3.67
+    },
+    "15": {
+      "A": 3.54,
+      "B": 3.94,
+      "C": 3.58
+    },
+    "20": {
+      "A": 3.63,
+      "B": 3.83,
+      "C": 3.49
+    },
+    "25": {
+      "A": 3.71,
+      "B": 3.71,
+      "C": 3.39
+    },
+    "30": {
+      "A": 3.8,
+      "B": 3.6,
+      "C": 3.3
+    },
+    "35": {
+      "A": 3.89,
+      "B": 3.49,
+      "C": 3.21
+    },
+    "40": {
+      "A": 3.97,
+      "B": 3.37,
+      "C": 3.11
+    }
+  },
+  "maut_crossover_npv_pct": 25,
+  "sanity_pct": {
+    "dari_29_1T": 2.4,
+    "dari_102_7T": 0.7
+  },
+  "mc_ranges": {
+    "harga": [
+      6000,
+      7500,
+      9000
+    ],
+    "volume_jt": [
+      42,
+      60,
+      78
+    ],
+    "marjin": [
+      0.33,
+      0.38,
+      0.43
+    ]
+  },
+  "mc": {
+    "p_pos": 1.0,
+    "p10": 332.9,
+    "p50": 627.9,
+    "p90": 965.8,
+    "min": 9.7,
+    "max": 1519.9,
+    "p90_minus_p10": 632.9
+  },
+  "mc_hist": {
+    "bins": [
+      6,
+      53,
+      166,
+      295,
+      483,
+      670,
+      792,
+      1007,
+      1045,
+      1109,
+      946,
+      832,
+      748,
+      617,
+      452,
+      310,
+      180,
+      118,
+      100,
+      47,
+      14,
+      6,
+      4,
+      0
+    ],
+    "edges": [
+      0.0,
+      66.7,
+      133.3,
+      200.0,
+      266.7,
+      333.3,
+      400.0,
+      466.7,
+      533.3,
+      600.0,
+      666.7,
+      733.3,
+      800.0,
+      866.7,
+      933.3,
+      1000.0,
+      1066.7,
+      1133.3,
+      1200.0,
+      1266.7,
+      1333.3,
+      1400.0,
+      1466.7,
+      1533.3,
+      1600.0
+    ],
+    "xmin": 0,
+    "xmax": 1600
+  },
+  "rev_thn3": 703.1,
+  "gate0": {
+    "pct": 60,
+    "vol_jt": 36.0,
+    "npv": 269.4,
+    "pct_above_breakeven": 94,
+    "test_cost_miliar": 2,
+    "sellthrough_target_pct": 70
+  },
+  "unit_economics": [
+    {
+      "tahun": 1,
+      "pemasaran_rp": 750,
+      "kontribusi_rp": 2001
+    },
+    {
+      "tahun": 2,
+      "pemasaran_rp": 333,
+      "kontribusi_rp": 2418
+    },
+    {
+      "tahun": 3,
+      "pemasaran_rp": 267,
+      "kontribusi_rp": 2484
+    },
+    {
+      "tahun": 4,
+      "pemasaran_rp": 213,
+      "kontribusi_rp": 2538
+    },
+    {
+      "tahun": 5,
+      "pemasaran_rp": 171,
+      "kontribusi_rp": 2580
+    }
+  ],
+  "tornado": {
+    "Harga jual +-20%": [
+      134.5,
+      1147.5
+    ],
+    "Volume tahun-1 +-30%": [
+      362.3,
+      919.7
+    ],
+    "Marjin +-5 poin": [
+      514.4,
+      767.6
+    ],
+    "Pemasaran tahun-1 +-25%": [
+      630.9,
+      651.0
+    ],
+    "Kanibalisasi +-10 poin": [
+      618.7,
+      663.3
+    ]
+  },
+  "tornado_base": 641.0,
+  "trade_margin": {
+    "0": {
+      "t_pct": 0,
+      "net_a_rp": 7500,
+      "npv_A": 641.0,
+      "npv_B": 71.2,
+      "npv_C": 39.8
+    },
+    "150": {
+      "t_pct": 15.0,
+      "net_a_rp": 6375,
+      "npv_A": 261.1,
+      "npv_B": 6.3,
+      "npv_C": -25.1
+    },
+    "200": {
+      "t_pct": 20.0,
+      "net_a_rp": 6000,
+      "npv_A": 134.5,
+      "npv_B": -15.3,
+      "npv_C": -46.7
+    },
+    "225": {
+      "t_pct": 22.5,
+      "net_a_rp": 5812,
+      "npv_A": 71.2,
+      "npv_B": -26.1,
+      "npv_C": -57.6
+    },
+    "250": {
+      "t_pct": 25.0,
+      "net_a_rp": 5625,
+      "npv_A": 7.8,
+      "npv_B": -36.9,
+      "npv_C": -68.4
+    },
+    "300": {
+      "t_pct": 30.0,
+      "net_a_rp": 5250,
+      "npv_A": -118.8,
+      "npv_B": -58.6,
+      "npv_C": -90.0
+    }
+  },
+  "trade_margin_int": {
+    "0": {
+      "A": 641,
+      "B": 71,
+      "C": 40
+    },
+    "150": {
+      "A": 261,
+      "B": 6,
+      "C": -25
+    },
+    "200": {
+      "A": 135,
+      "B": -15,
+      "C": -47
+    },
+    "225": {
+      "A": 71,
+      "B": -26,
+      "C": -58
+    },
+    "250": {
+      "A": 8,
+      "B": -37,
+      "C": -68
+    },
+    "300": {
+      "A": -119,
+      "B": -59,
+      "C": -90
+    }
+  },
+  "trade_zero_pct": {
+    "A": 25.3,
+    "B": 16.5,
+    "C": 9.2
+  },
+  "trade_crossover_ab_pct": 27.1,
+  "trade_crossover_ab_npv": -46.2,
+  "trade_condition_pct": 25.3,
+  "trade_breakeven_net_rp": 5602,
+  "mc_p1": 157.2,
+  "mc_uniform_neg_pct": 0.26,
+  "mc_uniform_neg_count": 26,
+  "gate0_rationale": {
+    "breakeven_vol_share_pct": 31.0,
+    "conversion_assumed_pct": 50,
+    "implied_threshold_pct": 62,
+    "threshold_pct": 60
+  },
+  "trade_row2": {
+    "0": {
+      "t_prem_pct": 0,
+      "t_massal_pct": 10,
+      "npv_A": 641.0,
+      "npv_B": 28.0
+    },
+    "150": {
+      "t_prem_pct": 15.0,
+      "t_massal_pct": 10,
+      "npv_A": 261.1,
+      "npv_B": 28.0
+    },
+    "200": {
+      "t_prem_pct": 20.0,
+      "t_massal_pct": 10,
+      "npv_A": 134.5,
+      "npv_B": 28.0
+    },
+    "250": {
+      "t_prem_pct": 25.0,
+      "t_massal_pct": 10,
+      "npv_A": 7.8,
+      "npv_B": 28.0
+    },
+    "300": {
+      "t_prem_pct": 30.0,
+      "t_massal_pct": 10,
+      "npv_A": -118.8,
+      "npv_B": 28.0
+    }
+  },
+  "trade_row2_int": {
+    "0": {
+      "A": 641,
+      "B": 28
+    },
+    "150": {
+      "A": 261,
+      "B": 28
+    },
+    "200": {
+      "A": 135,
+      "B": 28
+    },
+    "250": {
+      "A": 8,
+      "B": 28
+    },
+    "300": {
+      "A": -119,
+      "B": 28
+    }
+  },
+  "trade_row2_B_tmassal10": 28.0,
+  "trade_row2_crossover_tprem_pct": 24.2,
+  "combined_threshold": {
+    "vol_36jt_t_max_pct": 17.7,
+    "vol_42jt_t_max_pct": 20.4,
+    "vol_60jt_t_max_pct": 25.3,
+    "npv_vol36_t20": -34.5,
+    "npv_vol42_t20": 7.7
+  },
+  "trade_crossover_general": {
+    "intercept_pct": 22.5,
+    "slope": 0.171,
+    "points_pct": {
+      "0": 22.5,
+      "10": 24.21,
+      "20": 25.91,
+      "30": 27.62
+    },
+    "npv_B_at_tm": {
+      "0": 71.2,
+      "10": 28.0,
+      "20": -15.3,
+      "30": -58.6
+    }
+  },
+  "gate0_npv_cushion": {
+    "npv_corner_exact": 7.7,
+    "npv_corner_int": 8,
+    "npv_min_lanjut": 100,
+    "t_max_pct_at_42jt": 14.8,
+    "vol_min_jt_at_t20": 55.1
+  }
+}
