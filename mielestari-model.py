@@ -91,6 +91,31 @@ def npv_c():
         npv += cf * pv_factor(t)
     return npv, cfs
 
+def npv_b_t(t):
+    """NPV opsi B bila margin dagang t berlaku (distributor + ritel).
+    v8: HPP massal TETAP Rp 2.340 = 3.000 x (1 - 0,22); laba kotor per bungkus
+    = 3.000 x (1 - t) - 2.340. JANGAN pakai marjin % dari harga (regresi bug v1-v5)."""
+    hpp_massal = MASSAL_PRICE * (1 - MASSAL_MARGIN)  # Rp 2.340, TETAP
+    gp_massal = MASSAL_PRICE * (1 - t) - hpp_massal
+    cf = B_VOL_ADD * gp_massal / 1e9 + B_SAVING  # Rp miliar/tahun
+    ann = sum(pv_factor(k) for k in range(1, YEARS + 1))
+    return cf * ann - INVEST_B, [cf] * YEARS
+
+def npv_c_t(t):
+    """NPV opsi C bila margin dagang t berlaku (distributor + ritel).
+    v8: HPP mitra TETAP Rp 4.900 = 7.000 x (1 - 0,30); laba kotor per bungkus
+    = 7.000 x (1 - t) - 4.900. JANGAN pakai marjin % dari harga."""
+    hpp_mitra = C_PRICE * (1 - C_MARGIN)  # Rp 4.900, TETAP
+    gp = C_PRICE * (1 - t) - hpp_mitra
+    npv = -INVEST_C
+    cfs = []
+    for k in range(1, YEARS + 1):
+        vol = C_VOL_Y1 * (1.0 + C_GROWTH) ** (k - 1)
+        cf = C_SHARE * vol * gp / 1e9
+        cfs.append(cf)
+        npv += cf * pv_factor(k)
+    return npv, cfs
+
 def payback(cfs, invest):
     cum = 0.0
     for t, cf in enumerate(cfs, start=1):
