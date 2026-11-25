@@ -1,0 +1,118 @@
+{
+  "npv": {
+    "A": 641.0,
+    "B": 71.2,
+    "C": 39.8
+  },
+  "cf_A": [
+    120.1,
+    181.3,
+    232.9,
+    297.4,
+    378.0
+  ],
+  "cf_B": [
+    36.4,
+    36.4,
+    36.4,
+    36.4,
+    36.4
+  ],
+  "cf_C": [
+    25.2,
+    30.2,
+    36.3,
+    43.5,
+    52.3
+  ],
+  "payback_A": 1.33,
+  "tornado": {
+    "Harga jual +-20%": [
+      448.5,
+      833.5
+    ],
+    "Volume tahun-1 +-30%": [
+      362.3,
+      919.7
+    ],
+    "Marjin +-5 poin": [
+      514.4,
+      767.6
+    ],
+    "Pemasaran tahun-1 +-25%": [
+      630.9,
+      651.0
+    ],
+    "Kanibalisasi +-10 poin": [
+      618.7,
+      663.3
+    ]
+  },
+  "tornado_base": 641.0,
+  "mc": {
+    "p_pos": 1.0,
+    "p10": 456.6,
+    "p50": 632.9,
+    "p90": 838.1,
+    "min": 244.7,
+    "max": 1179.6,
+    "n": 10000
+  },
+  "breakeven_vol_m": 18.6,
+  "vol_y5_m": 146.5,
+  "spare_capacity_m": 264.0,
+  "vol_share_y1_pct": 0.41,
+  "market_anchor_triliun": 29.08,
+  "risks": [
+    {
+      "id": "R1",
+      "nama": "Kanibalisasi produk massal sendiri lebih besar dari model",
+      "P": 3,
+      "I": 2,
+      "alasan": "Kanibalisasi +10 poin hanya memotong NPV Rp 22 miliar (tornado)",
+      "mitigasi": "Posisikan Lestari Sehat di kanal modern + kemasan berbeda; pantau pangsa massal per kuartal, hentikan promo silang bila kanibalisasi > 20%.",
+      "residual_P": 2,
+      "residual_I": 2
+    },
+    {
+      "id": "R2",
+      "nama": "Harga gandum / minyak sawit naik, marjin premium tergerus",
+      "P": 4,
+      "I": 3,
+      "alasan": "Marjin -5 poin memotong NPV Rp 127 miliar (tornado); harga komoditas bergejolak",
+      "mitigasi": "Kontrak forward 12 bulan untuk gandum + minyak; diversifikasi 2 pemasok; efisiensi resep tanpa mengubah klaim.",
+      "residual_P": 3,
+      "residual_I": 2
+    },
+    {
+      "id": "R3",
+      "nama": "Daya beli turun, downgrading berlanjut, volume premium tidak tercapai",
+      "P": 4,
+      "I": 4,
+      "alasan": "Volume -30% memotong NPV Rp 279 miliar (tornado); konsumsi per kapita -3,4% dan kelas menengah menyusut (R7-R9)",
+      "mitigasi": "Peluncuran bertahap (pilot Jabodetabek 3 bulan); kemasan kecil harga masuk; hentikan ekspansi bila penjualan pilot < 70% target.",
+      "residual_P": 3,
+      "residual_I": 3
+    },
+    {
+      "id": "R4",
+      "nama": "Pemain besar (Indofood / Wings) masuk segmen sehat dengan skala distribusi",
+      "P": 3,
+      "I": 5,
+      "alasan": "Indofood CBP menjual mie instan Rp 50,44 triliun (2023, R11); masuknya raksasa bisa memangkas ramp volume hingga separuh",
+      "mitigasi": "Kecepatan ke pasar 12 bulan + penempatan eksklusif di modern trade; diferensiasi rasa dan klaim yang teruji lab.",
+      "residual_P": 3,
+      "residual_I": 4
+    },
+    {
+      "id": "R5",
+      "nama": "Klaim \"sehat\" dipertanyakan regulator / konsumen",
+      "P": 2,
+      "I": 4,
+      "alasan": "Klaim kesehatan diawasi BPOM; perbaikan label + reformulasi mahal dan merusak kepercayaan",
+      "mitigasi": "Klaim sesuai aturan BPOM, uji lab independen sebelum luncur; tanpa klaim medis; siapkan dana relabel Rp 5 miliar.",
+      "residual_P": 1,
+      "residual_I": 3
+    }
+  ]
+}
