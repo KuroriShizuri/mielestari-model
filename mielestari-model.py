@@ -14,7 +14,16 @@ import numpy as np
 PRICE = 7500            # Rp/bungkus Lestari Sehat
 VOL_Y1 = 60_000_000     # bungkus tahun-1
 GROWTH = 0.25           # pertumbuhan volume per tahun
-MARGIN = 0.38           # marjin kotor premium
+MARGIN = 0.38           # marjin kotor premium PADA HARGA DASAR (v6: lihat HPP di bawah)
+# v6 (25 Nov 2026, perbaikan Sonnet r3 gap 1): HPP per bungkus adalah RUPIAH TETAP,
+# bukan persen dari harga. HPP = Rp 4.650 = 7.500 x (1 - 0,38). Marjin 38% hanya
+# berlaku di harga dasar; bila harga digeser, HPP tetap Rp 4.650 dan laba kotor
+# per bungkus = harga - 4.650. Model v1-v5 memakai gp = harga x marjin, sehingga
+# HPP ikut turun saat harga turun (di titik impas Rp 2.505, HPP model hanya
+# Rp 1.553 - lebih murah dari HPP massal Rp 2.340; tidak masuk akal untuk produk
+# premium). Angka dasar di Rp 7.500 TIDAK berubah karena perubahan ini.
+PRICE_BASE = 7500       # harga dasar; HPP diturunkan dari marjin pada harga ini
+HPP_PACK = 4650         # Rp/bungkus, TETAP = PRICE_BASE * (1 - MARGIN)
 MKT_Y1 = 45.0           # Rp miliar, pemasaran tahun-1
 MKT_LATER = 25.0        # Rp miliar/tahun tahun 2-5 (ASUMSI, FIKTIF - lihat catatan)
 CANNIB = 0.15           # kanibalisasi, % dari volume premium
@@ -49,8 +58,11 @@ def pv_factor(t):
 
 def npv_a(price=PRICE, vol_y1=VOL_Y1, margin=MARGIN,
           mkt_y1=MKT_Y1, cannib=CANNIB, invest=INVEST_A):
-    """NPV opsi A (Rp miliar). Arus kas = laba kotor - pemasaran - biaya kanibalisasi."""
-    gp_pack = price * margin
+    """NPV opsi A (Rp miliar). Arus kas = laba kotor - pemasaran - biaya kanibalisasi.
+    v6: HPP per bungkus TETAP (PRICE_BASE x (1-margin)); marjin = marjin pada
+    harga dasar. Laba kotor per bungkus = harga - HPP."""
+    hpp = PRICE_BASE * (1 - margin)
+    gp_pack = price - hpp
     npv = -invest
     cfs = []
     for t in range(1, YEARS + 1):
@@ -126,11 +138,12 @@ N = 10_000
 p = rng.triangular(6000, 7500, 9000, N)
 v = rng.triangular(42_000_000, 60_000_000, 78_000_000, N)
 m = rng.triangular(0.33, 0.38, 0.43, N)
-# arus kas tahunan berbentuk vektor: vol_t = v * 1.25**(t-1); gross = vol_t*p*m
+# arus kas tahunan berbentuk vektor: vol_t = v * 1.25**(t-1); gross = vol_t*(p-HPP)
+# v6: HPP = 7500*(1-m) tetap per bungkus; m = marjin pada harga dasar.
 npvs = np.full(N, -INVEST_A)
 for t in range(1, YEARS + 1):
     vol_t = v * (1.0 + GROWTH) ** (t - 1)
-    gross = vol_t * p * m / 1e9
+    gross = vol_t * (p - PRICE_BASE * (1 - m)) / 1e9
     mkt = MKT_Y1 if t == 1 else MKT_LATER
     cann = CANNIB * vol_t * MASSAL_MARGIN_RP / 1e9
     npvs += (gross - mkt - cann) * pv_factor(t)
@@ -143,7 +156,51 @@ vol_y5 = VOL_Y1 * (1.0 + GROWTH) ** 4
 spare_capacity = 1_200_000_000 * (1 - 0.78)  # bungkus/tahun
 market_anchor = 14.54e9 * 2000 / 1e12        # Rp triliun
 vol_share_y1 = VOL_Y1 / 14.54e9 * 100        # % dari pasar
+def breakeven_price():
+    """Harga (Rp/bungkus) agar NPV A = 0, volume dan variabel lain di nilai dasar.
+    v6: HPP tetap Rp 4.650, jadi titik impas jauh lebih tinggi dari v1-v5 (Rp 2.505)."""
+    lo, hi = 0.0, PRICE
+    for _ in range(80):
+        mid = (lo + hi) / 2
+        v, _ = npv_a(price=mid)
+        if v > 0:
+            hi = mid
+        else:
+            lo = mid
+    return (lo + hi) / 2
+
+def breakeven_hpp():
+    """HPP per bungkus (Rp) agar NPV A = 0, harga dan variabel lain di nilai dasar.
+    Dicari lewat marjin: HPP = 7500 x (1 - marjin)."""
+    lo_m, hi_m = 0.0, MARGIN  # marjin 0 -> HPP 7500 (NPV<0); marjin dasar -> NPV>0
+    for _ in range(80):
+        mid = (lo_m + hi_m) / 2
+        v, _ = npv_a(margin=mid)
+        if v > 0:
+            hi_m = mid  # NPV positif: akar di bawah mid
+        else:
+            lo_m = mid  # NPV negatif: akar di atas mid
+    be_margin = (lo_m + hi_m) / 2
+    return PRICE_BASE * (1 - be_margin), be_margin
+
 be_vol = breakeven_volume()
+be_price = breakeven_price()
+be_hpp, be_margin = breakeven_hpp()
+# NPV per harga (volume dasar 60 jt) + skenario downside (v6, HPP tetap)
+npv_per_price = {p: round(npv_a(price=p)[0], 1)
+                 for p in [5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000]}
+downside = {
+    "harga_-20%_vol_-30%": round(npv_a(price=6000, vol_y1=42_000_000)[0], 1),
+    "vol_-50%": round(npv_a(vol_y1=30_000_000)[0], 1),
+    "harga_-20%_saja": round(npv_a(price=6000)[0], 1),
+    "harga_-20%_vol_-50%": round(npv_a(price=6000, vol_y1=30_000_000)[0], 1),
+    "harga_-10%_vol_-20%": round(npv_a(price=6750, vol_y1=48_000_000)[0], 1),
+    "marjin_-10poin": round(npv_a(margin=0.28)[0], 1),
+    "marjin_-10poin_vol_-30%": round(npv_a(margin=0.28, vol_y1=42_000_000)[0], 1),
+    "triple_harga_-20%_vol_-30%_marjin_-5poin": round(
+        npv_a(price=6000, vol_y1=42_000_000, margin=0.33)[0], 1),
+    "kanibalisasi_40%": round(npv_a(cannib=0.40)[0], 1),
+}
 
 # ---------------------------------------------------------------- risiko (skor P x I 1-5; dampak dibenarkan delta NPV tornado)
 #   Dampak diukur terhadap NPV A base Rp miliar: I=5 bila delta > 400; I=4 bila
@@ -185,6 +242,10 @@ print("Volume tahun-5 opsi A: %.1f juta bungkus (kapasitas sisa %.0f juta)" % (v
 print("Pangsa volume tahun-1 vs pasar: %.2f%% dari 14,54 miliar porsi" % vol_share_y1)
 print("Jangkar ukuran pasar: 14,54 miliar x Rp 2.000 = Rp %.2f triliun" % market_anchor)
 print("Break-even volume tahun-1 (NPV=0): %.1f juta bungkus" % be_vol)
+print("Break-even harga (NPV=0, HPP tetap Rp 4.650): Rp %.0f" % be_price)
+print("Break-even HPP (NPV=0, harga dasar): Rp %.0f (marjin %.1f%%)" % (be_hpp, be_margin * 100))
+print("NPV per harga (60 jt):", {k: round(v, 1) for k, v in npv_per_price.items()})
+print("Downside v6:", downside)
 print()
 print("=== TORNADO (NPV Rp miliar) ===")
 for k, (lo, hi) in sorted(tornado.items(), key=lambda kv: kv[1][1] - kv[1][0], reverse=True):
@@ -212,6 +273,12 @@ out = {
            "p90": round(p90, 1), "min": round(mc_min, 1), "max": round(mc_max, 1),
            "n": N},
     "breakeven_vol_m": round(be_vol, 1),
+    "breakeven_price_rp": round(be_price),
+    "breakeven_hpp_rp": round(be_hpp),
+    "breakeven_margin_pct": round(be_margin * 100, 1),
+    "hpp_pack_rp": HPP_PACK,
+    "npv_per_price": {str(k): v for k, v in npv_per_price.items()},
+    "downside": downside,
     "vol_y5_m": round(vol_y5 / 1e6, 1),
     "spare_capacity_m": round(spare_capacity / 1e6, 0),
     "vol_share_y1_pct": round(vol_share_y1, 2),
