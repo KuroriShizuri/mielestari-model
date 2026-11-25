@@ -67,3 +67,13 @@ python3 mielestari-model.py | head -8   # NPV A harus Rp 641 miliar
 
 Deck yang memakai model ini: uji kasus MieLestari (kurori-deck-skill).
 Lisensi: MIT.
+
+
+## Spreadsheet (untuk juri bisnis)
+
+**[MieLestari-Model-Keuangan.xlsx](https://raw.githubusercontent.com/KuroriShizuri/mielestari-model/main/MieLestari-Model-Keuangan.xlsx)** — model NPV yang sama, dengan **formula hidup**: ubah harga, volume, marjin, atau pemasaran di blok INPUT dan NPV berubah mengikuti rumus. Tidak perlu Python.
+
+- NPV opsi A: **Rp 641 miliar** (cocok dengan `mielestari-model.py`).
+- Sensitivitas harga: NPV pada Rp 6.000 / 6.500 / 7.500 / 8.500 = Rp 449 / 513 / 641 / 769 miliar.
+- Harga titik impas (NPV = 0): **Rp 2.505/bungkus**.
+- Pembanding: NPV opsi B Rp 71 miliar, opsi C Rp 40 miliar (rumus juga).
